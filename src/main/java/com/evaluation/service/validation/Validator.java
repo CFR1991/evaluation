@@ -19,14 +19,14 @@ public class Validator {
 	}
 
 	private boolean isValidInForm(InputObject input) {
-		return input.getCustomerID() != null && input.getTagID() != null && input.getRemoteIP() != null
+		return input.getCustomerId() != null && input.getTagId() != null && input.getRemoteIP() != null
 				&& input.getRemoteIP() > 0 && input.getTime() != null;
 	}
 
 	private boolean isValidInContent(InputObject input) {
-		return dbService.customerIDisInDataBaseAndNotDisabled(input.getCustomerID())
+		return dbService.customerIDisInDataBaseAndNotDisabled(input.getCustomerId())
 				&& dbService.remoteIPisNotInBlackList(input.getRemoteIP())
-				&& dbService.userIDisNotInBlackList(input.getUserID());
+				&& dbService.userIDisNotInBlackList(input.getUserId());
 	}
 
 }

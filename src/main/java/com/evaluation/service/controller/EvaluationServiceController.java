@@ -30,7 +30,7 @@ public class EvaluationServiceController {
 
 	@PutMapping("/validate")
 	public ResponseEntity<String> helloWorld(@RequestBody InputObject input) {
-		if (input.getCustomerID() == null) {
+		if (input.getCustomerId() == null) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		if (validator.isValid(input)) {

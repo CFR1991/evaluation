@@ -1,54 +1,62 @@
 package com.evaluation.service.controller.model;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputObject {
-	
+
 	@JsonProperty
-	private Integer customerID;
-	
+	private Integer customerId;
+
 	@JsonProperty
-	private Integer tagID;
-	
+	private Integer tagId;
+
 	@JsonProperty
-	private String userID;
-	
+	private String userId;
+
 	@JsonProperty
 	private Long remoteIP;
-	
+
 	@JsonProperty
 	private LocalDateTime time;
-	
-	public Integer getCustomerID() {
-		return customerID;
+
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomerID(Integer customerID) {
-		this.customerID = customerID;
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
-	public Integer getTagID() {
-		return tagID;
+
+	public Integer getTagId() {
+		return tagId;
 	}
-	public void setTagID(Integer tagID) {
-		this.tagID = tagID;
+
+	public void setTagId(Integer tagId) {
+		this.tagId = tagId;
 	}
-	public String getUserID() {
-		return userID;
+
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
 	public Long getRemoteIP() {
 		return remoteIP;
 	}
+
 	public void setRemoteIP(Long remoteIP) {
 		this.remoteIP = remoteIP;
 	}
+
 	public LocalDateTime getTime() {
 		return time;
 	}
+
 	public void setTime(LocalDateTime times) {
 		this.time = times;
 	}
