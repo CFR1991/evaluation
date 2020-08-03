@@ -28,16 +28,23 @@ public class EvaluationServiceController {
 		return "Input parameter: " + input;
 	}
 
-	@PutMapping("/validate")
+	@PutMapping("/evaluation")
 	public ResponseEntity<String> helloWorld(@RequestBody InputObject input) {
-		if (input.getCustomerId() == null) {
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		if (input.getCustomerID() == null) {
+			return new ResponseEntity<String>("noCustomerId: not added2DB", HttpStatus.BAD_REQUEST);
 		}
-		if (validator.isValid(input)) {
-			 dbService.addInput2DB(input,true);
-			return new ResponseEntity<String>(HttpStatus.OK);
-		}
-		 dbService.addInput2DB(input, false);
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		final boolean isValid = validator.isValid(input);
+		final HttpStatus status = isValid ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+		this.dbService.addInput2DB(input, isValid);
+		return new ResponseEntity<String>(creatResponseMessage(isValid), status);
 	}
+
+	private String creatResponseMessage(final boolean isValid) {
+		return validator.getMessage() + " added2DB as " + getStringFromValid(isValid) + " request";
+	}
+
+	private String getStringFromValid(boolean isValid) {
+		return isValid ? "valid" : "invalid";
+	}
+
 }

@@ -13,12 +13,18 @@ public class HourlyStatsId implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Column(name = "customerId", length = 11, nullable = false)
+	private Integer customerId;
+
+	@Column(name = "year_day_hour", length = 20, nullable = false)
+	private String year_day_hour;
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	public Integer getCustomerId() {
-		return customerId;
+		return this.customerId;
 	}
 
 	public void setCustomerId(Integer customerId) {
@@ -26,21 +32,27 @@ public class HourlyStatsId implements Serializable {
 	}
 
 	public String getYear_day_hour() {
-		return year_day_hour;
+		return this.year_day_hour;
 	}
 
 	public void setYear_day_hour(String year_day_hour) {
 		this.year_day_hour = year_day_hour;
 	}
 
-	@Column(name = "customerId", length = 11, nullable = false)
-	private Integer customerId;
+	@Override
+	public boolean equals(Object obj) {
+		HourlyStatsId other = (HourlyStatsId) obj;
+		if (obj == null) {
+			return false;
+		}
+		if (customerId != other.getCustomerId()) {
+			return false;
+		}
+		return year_day_hour.equals(year_day_hour);
+	}
 
-	@Column(name = "year_day_hour", length = 20, nullable = false)
-	private String year_day_hour;
-
-	public HourlyStatsId(Integer customerId, String year_day_hour) {
-		this.customerId = customerId;
-		this.year_day_hour = year_day_hour;
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }

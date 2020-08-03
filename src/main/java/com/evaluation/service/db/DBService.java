@@ -33,32 +33,30 @@ public class DBService {
 		this.helper = helper;
 	}
 
-	public boolean customerIDisInDataBaseAndNotDisabled(Integer coustumerID) {
-		return customerRepository.findById(coustumerID) != null
+	public boolean customerIdisInDataBaseAndNotDisabled(Integer coustumerID) {
+		return customerRepository.findById(coustumerID).isPresent()
 				&& customerRepository.findById(coustumerID).get().isActive();
 	}
 
-	public boolean remoteIPisNotInBlackList(Long string) {
-		return ipBlacklistRepository.findById(string) == null;
+	public boolean remoteIpisNotInIpBlackList(String ip) {
+		return !ipBlacklistRepository.findById(ip).isPresent();
 	}
 
-	public boolean userIDisNotInBlackList(String ua) {
-		return uaBlacklistRepository.findById(ua) == null;
+	public boolean userIDisNotInUaBlackList(String ua) {
+		return !uaBlacklistRepository.findById(ua).isPresent();
 	}
 
 	public void addInput2DB(InputObject input, boolean b) {
-		addInput2DBIntern(helper.getHourlyStatsId(input.getCustomerId()), b);
+		addInput2DBIntern(helper.getHourlyStatsId(input), b);
 	}
 
 	private void addInput2DBIntern(HourlyStatsId hourlyStatsId, boolean b) {
 		Optional<HourlyStats> hourlyStats = hourlyStatsRepository.findByHourlyStatsId(hourlyStatsId);
 		if (hourlyStats.isPresent()) {
-			hourlyStatsRepository.deleteByHourlyStatsId(hourlyStatsId);
 			hourlyStatsRepository.save(helper.updateAndGetHourlyStats(hourlyStats.get(), b));
 			return;
 		}
 		hourlyStatsRepository.save(helper.createAndGetHourlyStats(hourlyStatsId, b));
-		return;
 	}
 
 }

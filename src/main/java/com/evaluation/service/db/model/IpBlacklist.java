@@ -10,13 +10,13 @@ import javax.persistence.Table;
 public class IpBlacklist {
 	@Id
 	@Column(name = "ip", nullable = false)
-	private Long ip;
+	private String ip;
 
-	public Long getIp() {
+	public String getIp() {
 		return ip;
 	}
 
-	public void setIp(Long ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
 

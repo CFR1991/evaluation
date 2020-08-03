@@ -1,63 +1,61 @@
 package com.evaluation.service.controller.model;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputObject {
 
 	@JsonProperty
-	private Integer customerId;
+	private Integer customerID;
 
 	@JsonProperty
-	private Integer tagId;
+	private Integer tagID;
 
 	@JsonProperty
-	private String userId;
+	private String userID;
 
 	@JsonProperty
-	private Long remoteIP;
+	private String remoteIP;
 
 	@JsonProperty
-	private LocalDateTime time;
+	private Long timestamp;
 
-	public Integer getCustomerId() {
-		return customerId;
+	public Integer getCustomerID() {
+		return customerID;
 	}
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setCustomerID(Integer customerID) {
+		this.customerID = customerID;
 	}
 
-	public Integer getTagId() {
-		return tagId;
+	public Integer getTagID() {
+		return tagID;
 	}
 
-	public void setTagId(Integer tagId) {
-		this.tagId = tagId;
+	public void setTagID(Integer tagID) {
+		this.tagID = tagID;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUserID() {
+		return userID;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
-	public Long getRemoteIP() {
+	public String getRemoteIP() {
 		return remoteIP;
 	}
 
-	public void setRemoteIP(Long remoteIP) {
+	public void setRemoteIP(String remoteIP) {
 		this.remoteIP = remoteIP;
 	}
 
-	public LocalDateTime getTime() {
-		return time;
+	public Long getTimestamp() {
+		return timestamp;
 	}
 
-	public void setTime(LocalDateTime times) {
-		this.time = times;
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
 	}
 }

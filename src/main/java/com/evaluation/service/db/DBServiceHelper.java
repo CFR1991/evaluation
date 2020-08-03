@@ -1,36 +1,45 @@
 package com.evaluation.service.db;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.evaluation.service.controller.model.InputObject;
 import com.evaluation.service.db.model.HourlyStats;
 import com.evaluation.service.db.model.HourlyStatsId;
 
 @Service
 class DBServiceHelper {
 
-	public HourlyStatsId getHourlyStatsId(Integer customerId) {
-		String year_day_hour = getTimeString_year_day_hour();
-		return new HourlyStatsId(customerId, year_day_hour);
+	public HourlyStatsId getHourlyStatsId(InputObject inputObject) {
+		String year_day_hour = getTimeString_year_day_hour(inputObject.getTimestamp());
+		return createAndGetHourlyStatsId(inputObject.getCustomerID(), year_day_hour);
 	}
 
-	private String getTimeString_year_day_hour() {
-		LocalDateTime ldt = LocalDateTime.now();
+	private HourlyStatsId createAndGetHourlyStatsId(Integer customerId, String year_day_hour) {
+		HourlyStatsId hourlyStatsId = new HourlyStatsId();
+		hourlyStatsId.setCustomerId(customerId);
+		hourlyStatsId.setYear_day_hour(year_day_hour);
+		return hourlyStatsId;
+	}
+
+	private String getTimeString_year_day_hour(Long timestamp) {
+		Timestamp ts = new Timestamp(timestamp);
+		LocalDateTime ldt = ts.toLocalDateTime();
 		return String.format("%d_%d_%d", ldt.getYear(), ldt.getDayOfYear(), ldt.getHour());
 	}
 
 	//
 
 	public HourlyStats updateAndGetHourlyStats(HourlyStats hourlyStats, boolean b) {
-		hourlyStats = updateRequestsAndInvalidRequests(hourlyStats, b);
-		return hourlyStats;
+		return updateRequestsAndInvalidRequests(hourlyStats, b);
 	}
 
 	public HourlyStats createAndGetHourlyStats(HourlyStatsId hourlyStatsId, boolean b) {
-		HourlyStats hourlyStats = new HourlyStats(hourlyStatsId);
-		hourlyStats = updateRequestsAndInvalidRequests(hourlyStats, b);
-		return hourlyStats;
+		HourlyStats hourlyStats = new HourlyStats();
+		hourlyStats.setHourlyStatsId(hourlyStatsId);
+		return updateRequestsAndInvalidRequests(hourlyStats, b);
 	}
 
 	private HourlyStats updateRequestsAndInvalidRequests(HourlyStats hourlyStats, boolean b) {

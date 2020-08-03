@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.evaluation.service.db.model.IpBlacklist;
 
 @Repository
-public interface IpBlacklistRepository extends CrudRepository<IpBlacklist, Long> {
+public interface IpBlacklistRepository extends CrudRepository<IpBlacklist, String> {
 
 }
