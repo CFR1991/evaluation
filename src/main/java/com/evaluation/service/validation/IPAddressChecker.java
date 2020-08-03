@@ -32,7 +32,6 @@ class IPAddressChecker {
 		try {
 			return Integer.parseInt(splitted);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
