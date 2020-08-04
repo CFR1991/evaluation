@@ -3,9 +3,9 @@ package com.evaluation.service.validation;
 import org.springframework.stereotype.Service;
 
 @Service
-class IPAddressChecker {
+public class IPAddressChecker implements IIPAddressChecker {
 
-	boolean check(String ipString) {
+	public boolean check(String ipString) {
 		if (!ipString.contains(".")) {
 			return false;
 		}

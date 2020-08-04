@@ -1,4 +1,4 @@
-package com.evaluation.service.db;
+package com.evaluation.service.db.service;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import com.evaluation.service.db.repository.IpBlacklistRepository;
 import com.evaluation.service.db.repository.UaBlacklistRepository;
 
 @Service
-public class DBService {
+ class DBService implements IDBService {
 
 	private final CustomerRepository customerRepository;
 	private final IpBlacklistRepository ipBlacklistRepository;
@@ -23,7 +23,7 @@ public class DBService {
 	private final DBServiceHelper helper;
 
 	@Autowired
-	public DBService(CustomerRepository customerRepository, IpBlacklistRepository ipBlacklistRepository,
+	DBService(CustomerRepository customerRepository, IpBlacklistRepository ipBlacklistRepository,
 			UaBlacklistRepository uaBlacklistRepository, HourlyStatsRepository hourlyStatsRepository,
 			DBServiceHelper helper) {
 		this.customerRepository = customerRepository;
@@ -33,12 +33,12 @@ public class DBService {
 		this.helper = helper;
 	}
 
-	public boolean customerIdisInDataBaseAndNotDisabled(Integer coustumerID) {
+	public boolean customerIdIsInDataBaseAndNotDisabled(Integer coustumerID) {
 		return customerRepository.findById(coustumerID).isPresent()
 				&& customerRepository.findById(coustumerID).get().isActive();
 	}
 
-	public boolean remoteIpisNotInIpBlackList(String ip) {
+	public boolean remoteIpIsNotInIpBlackList(String ip) {
 		return !ipBlacklistRepository.findById(ip).isPresent();
 	}
 

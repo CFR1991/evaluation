@@ -1,4 +1,4 @@
-package com.evaluation.service.db;
+package com.evaluation.service.db.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import com.evaluation.service.db.model.HourlyStatsId;
 @Service
 class DBServiceHelper {
 
-	public HourlyStatsId getHourlyStatsId(InputObject inputObject) {
+	 HourlyStatsId getHourlyStatsId(InputObject inputObject) {
 		String year_day_hour = getTimeString_year_day_hour(inputObject.getTimestamp());
 		return createAndGetHourlyStatsId(inputObject.getCustomerID(), year_day_hour);
 	}
